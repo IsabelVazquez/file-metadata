@@ -9,7 +9,12 @@ app.get('/', function (req, res) {
 });
 
 app.post('/get-file-size', upload.single('file'), function (req, res, next) {
-  res.send(JSON.stringify({"size":req.file.size}));
+  if (req.file === undefined){
+    return res.send('Do not leave empty. Upload a document.')
+  }
+  else {
+    return res.send(JSON.stringify({"size":req.file.size}));
+  }
 });
 
 app.listen(port);
